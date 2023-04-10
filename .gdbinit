@@ -50,6 +50,7 @@ spliter.show("args", on="regs")
 spliter.show("expressions", on="args")
 
 gdb.execute("set context-sections \"%s\"" % sections)
+gdb.execute("set show-retaddr-reg on")
 
 spliter.build()
 
