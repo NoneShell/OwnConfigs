@@ -51,7 +51,7 @@ cp $(pwd)/.vimrc $HOME/.vimrc
 mkdir -p $HOME/.vim/colors
 cp $HOME/.vim/plugged/vim-colors-solarized/colors/solarized.vim $HOME/.vim/colors/
 vim +PlugInstall +qall
-$HOME/vim/plugged/YouCompleteMe/install.sh
+$HOME/.vim/plugged/YouCompleteMe/install.sh
 
 # install and config tmux
 print_message 0 "info" "Installing tmux"
