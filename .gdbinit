@@ -1,10 +1,8 @@
-source /home/utest/app/pwndbg/gdbinit.py
-source /home/utest/app/splitmind/gdbinit.py
+source $HOME/.pwndbg/gdbinit.py
+source $HOME/.splitmind/gdbinit.py
 
 set context-clear-screen off
 set debug-events off
-
-
 
 python
 
