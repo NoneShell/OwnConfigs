@@ -56,8 +56,8 @@ $HOME/.vim/plugged/YouCompleteMe/install.sh
 # install and config tmux
 print_message 0 "info" "Installing tmux"
 git clone https://github.com/gpakosz/.tmux.git $HOME/.tmux
-ln -s -f $HOME/.tmux/.tmux.conf
-cp $HOME/.tmux/.tmux.conf.local .
+ln -s -f $HOME/.tmux/.tmux.conf 
+cp $HOME/.tmux/.tmux.conf.local $HOME/
 sed -i '/set -g prefix2 C-a/s/^/#/' $HOME/.tmux/.tmux.conf
 sed -i '/bind C-a send-prefix -2/s/^/#/' $HOME/.tmux/.tmux.conf
 
