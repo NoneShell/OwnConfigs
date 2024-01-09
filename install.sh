@@ -37,8 +37,8 @@ fi
 
 # update source list and install essential packages
 print_message 0 "info" "Updating source list and installing essential packages"
-apt-get update -y
-apt-get install -y ${ESSENTIAL_PACKAGES}
+sudo apt-get update -y
+sudo apt-get install -y ${ESSENTIAL_PACKAGES}
 
 # install and config oh-my-zsh
 print_message 0 "info" "Installing oh-my-zsh"
@@ -51,6 +51,7 @@ source $HOME/.zshrc
 print_message 0 "info" "Installing vim"
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+git clone https://github.com/altercation/vim-colors-solarized.git $HOME/.vim/plugged/vim-colors-solarized
 cp $(pwd)/.vimrc $HOME/.vimrc
 mkdir -p $HOME/.vim/colors
 cp $HOME/.vim/plugged/vim-colors-solarized/colors/solarized.vim $HOME/.vim/colors/
