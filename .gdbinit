@@ -1,5 +1,5 @@
-source $HOME/.pwndbg/gdbinit.py
-source $HOME/.splitmind/gdbinit.py
+source ~/.pwndbg/gdbinit.py
+source ~/.splitmind/gdbinit.py
 
 set context-clear-screen off
 set debug-events off
