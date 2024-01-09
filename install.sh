@@ -6,7 +6,7 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m'
 
-ESSENTIAL_PACKAGES = "build-essential tmux git vim curl wget zsh gdb gdb-multiarch python3 python3-pip python3-dev net-tools openssh-server"
+ESSENTIAL_PACKAGES="build-essential tmux git vim curl wget zsh gdb gdb-multiarch python3 python3-pip python3-dev net-tools openssh-server"
 
 print_message() {
     local indent=$1
