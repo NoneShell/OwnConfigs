@@ -29,11 +29,6 @@ print_message() {
     esac
 }
 
-# check sudo permission
-if [ "$EUID" -ne 0 ]
-  then print_message 0 "error" "Please run as root"
-  exit
-fi
 
 # update source list and install essential packages
 print_message 0 "info" "Updating source list and installing essential packages"
