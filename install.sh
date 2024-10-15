@@ -38,6 +38,7 @@ sudo apt-get install -y ${ESSENTIAL_PACKAGES}
 CURRENT_DIR=$(pwd)
 
 # install and config oh-my-zsh
+
 print_message 0 "info" "Installing oh-my-zsh"
 echo "Y" | sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 sed -i 's/^ZSH_THEME="robbyrussell"/ZSH_THEME="ys"/' $HOME/.zshrc
@@ -45,27 +46,33 @@ sed -i '/^PROMPT=/{N;s/\n//}' $HOME/.oh-my-zsh/themes/ys.zsh-theme
 source $HOME/.zshrc
 
 # install and config vim 
-print_message 0 "info" "Installing vim"
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-git clone https://github.com/altercation/vim-colors-solarized.git $HOME/.vim/plugged/vim-colors-solarized
-cp $CURRENT_DIR/.vimrc $HOME/.vimrc
-mkdir -p $HOME/.vim/colors
-cp $HOME/.vim/plugged/vim-colors-solarized/colors/solarized.vim $HOME/.vim/colors/
-vim +PlugInstall +qall
-$HOME/.vim/plugged/YouCompleteMe/install.sh
-
+install_vim() {
+	print_message 0 "info" "Installing vim"
+	curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	git clone https://github.com/altercation/vim-colors-solarized.git $HOME/.vim/plugged/vim-colors-solarized
+	cp $CURRENT_DIR/.vimrc $HOME/.vimrc
+	mkdir -p $HOME/.vim/colors
+	cp $HOME/.vim/plugged/vim-colors-solarized/colors/solarized.vim $HOME/.vim/colors/
+	vim +PlugInstall +qall
+	$HOME/.vim/plugged/YouCompleteMe/install.sh
+}
 # install and config tmux
-print_message 0 "info" "Installing tmux"
-git clone https://github.com/gpakosz/.tmux.git $HOME/.tmux
-ln -s -f $HOME/.tmux/.tmux.conf $HOME/.tmux.conf
-cp $HOME/.tmux/.tmux.conf.local $HOME/
-sed -i '/set -g prefix2 C-a/s/^/#/' $HOME/.tmux/.tmux.conf
-sed -i '/bind C-a send-prefix -2/s/^/#/' $HOME/.tmux/.tmux.conf
-
+install_tmux() {
+	print_message 0 "info" "Installing tmux"
+	git clone https://github.com/gpakosz/.tmux.git $HOME/.tmux
+	ln -s -f $HOME/.tmux/.tmux.conf $HOME/.tmux.conf
+	cp $HOME/.tmux/.tmux.conf.local $HOME/
+	sed -i '/set -g prefix2 C-a/s/^/#/' $HOME/.tmux/.tmux.conf
+	sed -i '/bind C-a send-prefix -2/s/^/#/' $HOME/.tmux/.tmux.conf
+}
 # install and config gdb
-print_message 0 "info" "Installing gdb"
-git clone https://github.com/pwndbg/pwndbg.git $HOME/.pwndbg
-cd $HOME/.pwndbg && ./setup.sh && cd $CURRENT_DIR
-git clone https://github.com/jerdna-regeiz/splitmind.git $HOME/.splitmind
-cp $CURRENT_DIR/.gdbinit $HOME/.gdbinit
+install_gdb(){
+	print_message 0 "info" "Installing gdb"
+	git clone https://github.com/pwndbg/pwndbg.git $HOME/.pwndbg
+	cd $HOME/.pwndbg && ./setup.sh && cd $CURRENT_DIR
+	git clone https://github.com/jerdna-regeiz/splitmind.git $HOME/.splitmind
+	cp $CURRENT_DIR/.gdbinit $HOME/.gdbinit
+}
+
+install_gdb
