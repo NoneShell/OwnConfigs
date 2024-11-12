@@ -75,4 +75,6 @@ install_gdb(){
 	cp $CURRENT_DIR/.gdbinit $HOME/.gdbinit
 }
 
+install_vim
+install_tmux
 install_gdb
