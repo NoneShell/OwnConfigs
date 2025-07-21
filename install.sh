@@ -38,13 +38,13 @@ sudo apt-get install -y ${ESSENTIAL_PACKAGES}
 CURRENT_DIR=$(pwd)
 
 # install and config oh-my-zsh
-
-print_message 0 "info" "Installing oh-my-zsh"
-echo "Y" | sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-sed -i 's/^ZSH_THEME="robbyrussell"/ZSH_THEME="ys"/' $HOME/.zshrc
-sed -i '/^PROMPT=/{N;s/\n//}' $HOME/.oh-my-zsh/themes/ys.zsh-theme
-source $HOME/.zshrc
-
+install_zsh() {
+	print_message 0 "info" "Installing oh-my-zsh"
+	echo "Y" | sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+	sed -i 's/^ZSH_THEME="robbyrussell"/ZSH_THEME="ys"/' $HOME/.zshrc
+	sed -i '/^PROMPT=/{N;s/\n//}' $HOME/.oh-my-zsh/themes/ys.zsh-theme
+	source $HOME/.zshrc
+}
 # install and config vim 
 install_vim() {
 	print_message 0 "info" "Installing vim"
@@ -75,6 +75,6 @@ install_gdb(){
 	cp $CURRENT_DIR/.gdbinit $HOME/.gdbinit
 }
 
-install_vim
+# install_vim
 install_tmux
-install_gdb
+# install_gdb
