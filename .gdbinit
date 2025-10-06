@@ -14,6 +14,7 @@ class SwitchModeCommand(gdb.Command):
     
     def __init__(self):
         super(SwitchModeCommand, self).__init__("switch-mode", gdb.COMMAND_USER)
+        self.current_splitter = None
     
     def invoke(self, arg, from_tty):
         if not arg:
@@ -32,9 +33,19 @@ class SwitchModeCommand(gdb.Command):
         print(f"Switched to mode: {mode}")
     
     def setup_layout(self, mode):
+        # 清理现有布局
+        if self.current_splitter is not None:
+            try:
+                self.current_splitter.close()
+            except:
+                # 如果清理失败，可能是因为窗格已被删除，忽略错误
+                pass
+        
         # 重新设置布局
         import splitmind
         spliter = splitmind.Mind()
+        self.current_splitter = spliter.splitter
+        
         spliter.select("main").right(display="regs", size="50%")
         
         sections = "regs"
