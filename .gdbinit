@@ -56,29 +56,36 @@ class SwitchModeCommand(gdb.Command):
             legend_on = "disasm"
             sections += " disasm"
             spliter.select("main").above(display="disasm", size="70%", banner="none")
-            gdb.execute("set context-code-lines 30")
+            # 设置反汇编上下文行数
+            gdb.execute("set context-disasm-lines 25")
         elif mode == "s":
             sections += " code"
             spliter.select("main").above(display="code", size="70%", banner="none")
-            # gdb.execute("set context-source-code-lines 30")
+            # 设置源码上下文行数
+            gdb.execute("set context-code-lines 30")
         else:
             sections += " disasm code"
-            spliter.select("main").above(display="code", size="70%")
-            spliter.select("code").below(display="disasm", size="40%")
-            gdb.execute("set context-code-lines 8")
-            gdb.execute("set context-source-code-lines 20")
+            spliter.select("main").above(display="code", size="70%", banner="none")
+            spliter.select("code").below(display="disasm", size="40%", banner="none")
+            gdb.execute("set context-code-lines 25")
+            gdb.execute("set context-disasm-lines 10")
         
         sections += " args stack backtrace expressions"
         
         spliter.show("legend", on=legend_on)
+        # 布局右边窗口
         spliter.show("stack", on="regs")
         spliter.show("backtrace", on="regs")
         spliter.show("args", on="regs")
         spliter.show("expressions", on="args")
-        
+        # 基本的pwndbg配置
         gdb.execute("set context-sections %s" % sections)
+        # 设置栈帧显示行数
+        gdb.execute("set context-stack-lines 20")
+        # 显示返回地址寄存器
         gdb.execute("set show-retaddr-reg on")
-        
+        # 设置代码缩进
+        gdb.execute("set context-code-tabstop 4")
         spliter.build()
 
 # 注册命令
