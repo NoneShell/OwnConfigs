@@ -60,7 +60,7 @@ class SwitchModeCommand(gdb.Command):
         elif mode == "s":
             sections += " code"
             spliter.select("main").above(display="code", size="70%", banner="none")
-            gdb.execute("set context-source-code-lines 30")
+            # gdb.execute("set context-source-code-lines 30")
         else:
             sections += " disasm code"
             spliter.select("main").above(display="code", size="70%")
@@ -76,7 +76,7 @@ class SwitchModeCommand(gdb.Command):
         spliter.show("args", on="regs")
         spliter.show("expressions", on="args")
         
-        gdb.execute("set context-sections \"%s\"" % sections)
+        gdb.execute("set context-sections %s" % sections)
         gdb.execute("set show-retaddr-reg on")
         
         spliter.build()
